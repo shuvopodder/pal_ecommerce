@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "410439207260",
+    "project_id": "pal-ecommerce",
+    "storage_bucket": "pal-ecommerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410439207260:android:795dd1ff1333118fcd1999",
+        "android_client_info": {
+          "package_name": "com.example.pal_ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410439207260-9t8u71cpdhd0n1063timr0mutptrcjqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB80kYwHxtO-7aCiKRdac7fhs8CMnMSZtk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410439207260-9t8u71cpdhd0n1063timr0mutptrcjqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
