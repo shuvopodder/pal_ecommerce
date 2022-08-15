@@ -1,5 +1,3 @@
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -9,9 +7,9 @@ import '../elements/PermissionDeniedWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 
 class ProfileWidget extends StatefulWidget {
-  late final GlobalKey<ScaffoldState> parentScaffoldKey;
+  final GlobalKey<ScaffoldState> parentScaffoldKey;
 
-  ProfileWidget({ Key? key, required this.parentScaffoldKey}) : super(key: key);
+  const ProfileWidget({ Key? key, required this.parentScaffoldKey}) : super(key: key);
   @override
   _ProfileWidgetState createState() => _ProfileWidgetState();
 }
@@ -29,9 +27,9 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
       key: _con.scaffoldKey,
       drawer: DrawerWidget(),
       appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).primaryColor),
-          onPressed: () => _con.scaffoldKey?.currentState?.openDrawer(),
+        leading: IconButton(
+          icon: Icon(Icons.sort, color: Theme.of(context).primaryColor),
+          onPressed: () => _con.scaffoldKey.currentState?.openDrawer(),
         ),
         automaticallyImplyLeading: false,
        // backgroundColor: Theme.of(context).accentColor,
@@ -52,7 +50,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
 //              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
               child: Column(
                 children: <Widget>[
-                  ProfileAvatarWidget(user: currentUser.value),
+                 // ProfileAvatarWidget(user: currentUser.value),
                   ListTile(
                     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     leading: Icon(
@@ -64,14 +62,14 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
                       style: Theme.of(context).textTheme.headline4,
                     ),
                   ),
-                  Padding(
+    /* Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
                       "currentUser.value?.bio" ?? "",
                       style: Theme.of(context).textTheme.bodyText2,
                     ),
                   ),
-                  /*ListTile(
+                  ListTile(
                     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     leading: Icon(
                       Icons.shopping_basket,

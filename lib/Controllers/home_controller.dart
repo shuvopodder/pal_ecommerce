@@ -5,7 +5,10 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../helpers/helper.dart';
 
 class HomeController extends ControllerMVC {
-  get refreshHome => null;//test
+
+  Future<void> refreshHome() async {
+    setState(() { });
+  }
  /* List<Category> categories = <Category>[];
   List<Slide> slides = <Slide>[];
   List<Restaurant> topRestaurants = <Restaurant>[];

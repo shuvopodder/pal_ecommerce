@@ -7,7 +7,7 @@ import '../Controllers/home_controller.dart';
 class Home extends StatefulWidget {
   late final GlobalKey<ScaffoldState> parentScaffoldKey;
 
-  //Home({Key? key, this.parentScaffoldKey}) : super(key: key);
+  Home({Key? key, parentScaffoldKey}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -24,18 +24,34 @@ class _HomeState extends StateMVC<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: new IconButton(
-          icon: new Icon(Icons.sort, color: Theme.of(context).hintColor),
-          onPressed: () => widget.parentScaffoldKey.currentState!.openDrawer(),
+        leading: IconButton(
+          icon: Icon(Icons.sort, color: Theme.of(context).hintColor),
+          onPressed: () => widget.parentScaffoldKey.currentState?.openDrawer(),
         ),
         automaticallyImplyLeading: false,
         //backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
         title: Text("Pal Ecommerce"),
-        actions: <Widget>[
+        actions: const <Widget>[
          // new ShoppingCartButtonWidget(iconColor: Theme.of(context).hintColor, labelColor: Theme.of(context).accentColor),
         ],
+      ),
+      body: RefreshIndicator(
+        onRefresh: _con.refreshHome,
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+          child: Column(
+
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+             // _buildImageSlider(),
+              Text("data"),
+            ],
+          ),
+        ),
       ),
       /*body: RefreshIndicator(
         onRefresh: _con.refreshHome,
@@ -244,3 +260,5 @@ class _HomeState extends StateMVC<Home> {
     );
   }
 }
+
+
