@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
+import '../Model/cart.dart';
+
 class CartController extends ControllerMVC {
-  //List<Cart> carts = <Cart>[];
+  List<Cart> carts = <Cart>[];
   double taxAmount = 0.0;
   double deliveryFee = 0.0;
   int cartCount = 0;
@@ -15,7 +17,7 @@ class CartController extends ControllerMVC {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
 
-  /*void listenForCarts({String message}) async {
+  void listenForCarts({String message}) async {
     carts.clear();
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
@@ -96,7 +98,7 @@ class CartController extends ControllerMVC {
     total = subTotal + taxAmount + deliveryFee;
     setState(() {});
   }
-
+/*
   void doApplyCoupon(String code, {String message}) async {
     coupon = new Coupon.fromJSON({"code": code, "valid": null});
     final Stream<Coupon> stream = await verifyCoupon(code);
@@ -112,7 +114,7 @@ class CartController extends ControllerMVC {
 //      saveCoupon(currentCoupon).then((value) => {
 //          });
     });
-  }
+  }*/
 
   incrementQuantity(Cart cart) {
     if (cart.quantity <= 99) {
@@ -153,14 +155,4 @@ class CartController extends ControllerMVC {
       }
     }
   }
-
-  Color getCouponIconColor() {
-    logger.e(coupon.toMap());
-    if (coupon?.valid == true) {
-      return Colors.green;
-    } else if (coupon?.valid == false) {
-      return Colors.redAccent;
-    }
-    return Theme.of(state.context).focusColor.withOpacity(0.7);
-  }*/
 }

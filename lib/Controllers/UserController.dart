@@ -1,16 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
-import 'package:pal_ecommerce/Model/User.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Constant/FireStore.dart';
+import '../Model/usermodel.dart';
 
 class UserController extends ControllerMVC{
 
-  UserModel usermodel = UserModel();
+  UserModel usermodel = UserModel(userImage: '', userAddress: '', userGender: '', userPhoneNumber: '', userName: '', userEmail: '');
   bool hidePassword = true;
   var isLoggedIn = false;
   var googleSignIn = GoogleSignIn();
   var firebaseauth = FirebaseAuth.instance.currentUser;
+
+  late final FirebaseAuth firebaseAuth;
+  late final FirebaseFirestore firebaseFirestore;
+  //final SharedPreferences prefs;
+
   //OverlayEntry loader;
 
 
@@ -68,6 +77,8 @@ class UserController extends ControllerMVC{
   Future<void> google_login() async {
     //Navigator.of(scaffoldKey.currentContext!).pushReplacementNamed('/Home');
 
+    notifyListeners();
+
     GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
     if(googleSignInAccount == null){
 
@@ -81,11 +92,46 @@ class UserController extends ControllerMVC{
       try{
         await FirebaseAuth.instance.signInWithCredential(authCredential);
         print(FirebaseAuth.instance.currentUser?.displayName.toString());
+        //signin completed
+
+        User? firebaseUser = (await firebaseAuth.signInWithCredential(authCredential)).user;
+        print("test firebaseuser"+ firebaseUser!.uid.toString());
+
+        //userStore(firebaseUser);
+        if(firebaseUser!=null){
+          final QuerySnapshot result = await firebaseFirestore
+              .collection(FirestoreConstant.pathUserCollection)
+              .where(FirestoreConstant.id, isEqualTo: firebaseUser.uid)
+              .get();
+          final List<DocumentSnapshot> documents = result.docs;
+          if (documents.isEmpty) {
+            // Writing data to server because here is a new user
+            firebaseFirestore.collection(FirestoreConstant.pathUserCollection).doc(firebaseUser.uid).set({
+              FirestoreConstant.name: firebaseUser.displayName,
+             // FirestoreConstant.photoUrl: firebaseUser.photoURL,
+              FirestoreConstant.id: firebaseUser.uid,
+              FirestoreConstant.phone: firebaseUser.phoneNumber,
+            });
+/*
+        // Write data to local storage
+        User? currentUser = firebaseUser;
+        await prefs.setString(FirestoreConstant.id, currentUser.uid);
+        await prefs.setString(FirestoreConstant.nickname, currentUser.displayName ?? "");
+        await prefs.setString(FirestoreConstant.photoUrl, currentUser.photoURL ?? "");*/
+          }
+        }
+        //notifyListeners();
+
         //isLoggedIn.value = true;
+
         Navigator.of(scaffoldKey.currentContext!).pushReplacementNamed('/Pages', arguments: 2);
 
 
       }catch (e){}
     }
+  }
+
+  Future<void> userStore(User? firebaseUser) async {
+
   }
 }

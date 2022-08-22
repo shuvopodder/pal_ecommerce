@@ -76,6 +76,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           Navigator.of(context)
               .pushReplacementNamed('/Pages', arguments: widget.currentTab);
         }),*/
+
         body: widget.currentPage,
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

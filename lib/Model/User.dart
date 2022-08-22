@@ -1,10 +1,10 @@
-class UserModel{
+/*class UserModel{
   late String id;
   late String name;
   late String email;
   late String password;
   late String phone;
 
-  UserModel();
+  UserModel({userImage, userAddress, userEmail, userName, userGender, userPhoneNumber});
 
-}
+}*/

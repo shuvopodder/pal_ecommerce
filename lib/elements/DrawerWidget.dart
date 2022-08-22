@@ -153,20 +153,21 @@ class _DrawerWidgetState extends StateMVC<DrawerWidget> {
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
-          /*ListTile(
+          ListTile(
             onTap: () {
-              Navigator.of(context).pushNamed('/Pages', arguments: 4);
+              FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushNamed('/Login');
             },
             leading: Icon(
-              Icons.chat,
+              Icons.logout,
               color: Theme.of(context).focusColor.withOpacity(1),
             ),
             title: Text(
-              "Message",
+              "Logout",
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
-          ListTile(
+          /*ListTile(
             dense: true,
             title: Text(
               S.of(context).application_preferences,

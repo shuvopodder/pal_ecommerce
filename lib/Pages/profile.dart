@@ -28,8 +28,8 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
       drawer: DrawerWidget(),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.sort, color: Theme.of(context).primaryColor),
-          onPressed: () => _con.scaffoldKey.currentState?.openDrawer(),
+          icon: Icon(Icons.sort, color: Colors.black),
+          onPressed: () => _con.scaffoldKey.currentState!.openDrawer(),
         ),
         automaticallyImplyLeading: false,
        // backgroundColor: Theme.of(context).accentColor,
@@ -41,7 +41,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
               color: Theme.of(context).primaryColor)),
         ),
         actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Theme.of(context).primaryColor, labelColor: Theme.of(context).hintColor),
+          new ShoppingCartButtonWidget(iconColor: Colors.black, labelColor: Colors.black),
         ],
       ),
       body: _con.user == null

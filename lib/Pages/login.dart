@@ -57,7 +57,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                         //email
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
-                          onSaved: (input)=> con.usermodel.email=input!,
+                         // onSaved: (input)=> con.usermodel.email=input!,
                           validator: (input)=>input!.contains('@')
                               ?"Should be a valid email":null,
                           decoration: InputDecoration(
@@ -88,7 +88,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                         //password
                         TextFormField(
                           keyboardType: TextInputType.text,
-                          onSaved: (input)=> con.usermodel.password=input!,
+                          //onSaved: (input)=> con.usermodel.password=input!,
                           validator: (input)=>input!.length < 3
                               ?"Should be more than 3 character!":null,
                           decoration: InputDecoration(
@@ -223,7 +223,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
 
   void showLoaderDialog(BuildContext context) {
     AlertDialog alert = AlertDialog(
-      content: new Row(
+      content: Row(
         children: [
           CircularProgressIndicator(),
           Container(
