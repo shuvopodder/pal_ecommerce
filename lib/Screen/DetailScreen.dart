@@ -287,8 +287,6 @@ class _DetailScreenState extends State<DetailScreen> {
   Widget _buildButtonPart() {
     return Container(
       //height: 60,
-
-      //new
       height: 45,
       width: double.infinity,
       child: RaisedButton(
@@ -354,11 +352,11 @@ class _DetailScreenState extends State<DetailScreen> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Detail Page", style: TextStyle(color: Colors.black)),
+          title: const Text("Detail Page", style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             ),
@@ -388,7 +386,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     _buildSizePart(),
                     _buildColorPart(),
                     _buildQuentityPart(),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     _buildButtonPart(),

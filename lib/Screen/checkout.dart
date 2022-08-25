@@ -15,7 +15,7 @@ class CheckOut extends StatefulWidget {
 }
 
 class _CheckOutState extends State<CheckOut> {
-  TextStyle myStyle = TextStyle(
+  TextStyle myStyle = const TextStyle(
     fontSize: 18,
   );
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -47,16 +47,21 @@ class _CheckOutState extends State<CheckOut> {
         children: productProvider.userModelList.map((e) {
       return Container(
         height: 50,
-        child: MyButton(
-          name: "Buy",
+        child: RaisedButton(
+          child: const Text(
+            "Buy",
+            style: TextStyle(color: Colors.black),
+          ),
+          color: const Color(0xff746bc9),
           onPressed: () {
-            if (productProvider.getCheckOutModelList.isNotEmpty) {
+
+          if (productProvider.getCheckOutModelList.isNotEmpty) {
               FirebaseFirestore.instance.collection("Order").add({
                 "Product": productProvider.getCheckOutModelList
                     .map((c) => {
                           "ProductName": c.name,
                           "ProductPrice": c.price,
-                          "ProductQuetity": c.quantity,
+                          "ProductQuantity": c.quantity,
                           "ProductImage": c.image,
                           "Product Color": c.color,
                           "Product Size": c.size,
@@ -73,7 +78,7 @@ class _CheckOutState extends State<CheckOut> {
                 myList.clear();
               });
 
-              productProvider.addNotification("Notification");
+             // productProvider.addNotification("Notification");
             } else {
               _scaffoldKey.currentState?.showSnackBar(
                 const SnackBar(
@@ -83,6 +88,43 @@ class _CheckOutState extends State<CheckOut> {
             }
           },
         ),
+
+        /*MyButton(
+          name: "Buy",
+          onPressed: () {
+            if (productProvider.getCheckOutModelList.isNotEmpty) {
+              FirebaseFirestore.instance.collection("Order").add({
+                "Product": productProvider.getCheckOutModelList
+                    .map((c) => {
+                          "ProductName": c.name,
+                          "ProductPrice": c.price,
+                          "ProductQuantity": c.quantity,
+                          "ProductImage": c.image,
+                          "Product Color": c.color,
+                          "Product Size": c.size,
+                        })
+                    .toList(),
+                "TotalPrice": total.toStringAsFixed(2),
+                "UserName": e.userName,
+                "UserEmail": e.userEmail,
+                "UserNumber": e.userPhoneNumber,
+                "UserAddress": e.userAddress,
+                "UserId": user.uid,
+              });
+              setState(() {
+                myList.clear();
+              });
+
+             // productProvider.addNotification("Notification");
+            } else {
+              _scaffoldKey.currentState?.showSnackBar(
+                const SnackBar(
+                  content: Text("No Item Yet"),
+                ),
+              );
+            }
+          },
+        ),*/
       );
     }).toList());
   }
@@ -147,13 +189,13 @@ class _CheckOutState extends State<CheckOut> {
             NotificationButton(),
           ],*/
         ),
-        bottomNavigationBar: Container(
+        /*bottomNavigationBar: Container(
           height: 70,
           width: 100,
-          margin: EdgeInsets.symmetric(horizontal: 10),
-          padding: EdgeInsets.only(bottom: 15),
+          margin: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.only(bottom: 15),
           child: _buildButton(),
-        ),
+        ),*/
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
@@ -202,7 +244,8 @@ class _CheckOutState extends State<CheckOut> {
                     ],
                   ),
                 ),
-              )
+              ),
+              _buildButton()
             ],
           ),
         ),

@@ -1,6 +1,5 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -52,7 +51,7 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
         children: <Widget>[
           Icon(
             Icons.shopping_cart,
-            color: this.widget.iconColor,
+            color: widget.iconColor,
             size: 28,
           ),
           Container(
@@ -64,11 +63,11 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
                         color: Theme.of(context).primaryColor, fontSize: 9),
                   ),
             ),
-            padding: EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
             decoration: BoxDecoration(
-                color: this.widget.labelColor,
-                borderRadius: BorderRadius.all(Radius.circular(10))),
-            constraints: BoxConstraints(
+                color: widget.labelColor,
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            constraints: const BoxConstraints(
                 minWidth: 15, maxWidth: 15, minHeight: 15, maxHeight: 15),
           ),
         ],

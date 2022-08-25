@@ -16,8 +16,8 @@ class CartController extends ControllerMVC {
   CartController() {
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
   }
-
-  void listenForCarts({String message}) async {
+/*
+  void listenForCarts({required String message}) async {
     carts.clear();
     final Stream<Cart> stream = await getCart();
     stream.listen((Cart _cart) {
@@ -27,6 +27,7 @@ class CartController extends ControllerMVC {
           carts.add(_cart);
         });
       }
+
     }, onError: (a) {
       logger.e(a);
       ScaffoldMessenger.of(scaffoldKey?.currentContext).showSnackBar(SnackBar(
@@ -43,10 +44,10 @@ class CartController extends ControllerMVC {
       }
       onLoadingCartDone();
     });
-  }
+  }*/
 
   void onLoadingCartDone() {}
-
+/*
   void listenForCartsCount({String message}) async {
     final Stream<int> stream = await getCartCount();
     stream.listen((int _count) {
@@ -97,7 +98,7 @@ class CartController extends ControllerMVC {
     taxAmount = (subTotal + deliveryFee) * carts[0].food.restaurant.defaultTax / 100;
     total = subTotal + taxAmount + deliveryFee;
     setState(() {});
-  }
+  }*/
 /*
   void doApplyCoupon(String code, {String message}) async {
     coupon = new Coupon.fromJSON({"code": code, "valid": null});
@@ -116,7 +117,7 @@ class CartController extends ControllerMVC {
     });
   }*/
 
-  incrementQuantity(Cart cart) {
+  /*incrementQuantity(Cart cart) {
     if (cart.quantity <= 99) {
       ++cart.quantity;
       updateCart(cart);
@@ -154,5 +155,8 @@ class CartController extends ControllerMVC {
         Navigator.of(context).pushNamed('/DeliveryPickup');
       }
     }
+  }*/
+
+  Future<void> refreshCarts() async {
   }
 }

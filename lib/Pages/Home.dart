@@ -13,7 +13,6 @@ import '../Screen/singeproduct.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../provider/HomePageProvider.dart';
 
-
 class Home extends StatefulWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   //late final GlobalKey<ScaffoldState> parentScaffoldKey;
@@ -59,7 +58,8 @@ class _HomeState extends StateMVC<Home> {
         centerTitle: true,
         title: const Text("Pal Ecommerce"),
         actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Colors.black, labelColor: Colors.black),
+          new ShoppingCartButtonWidget(
+              iconColor: Colors.black, labelColor: Colors.black),
         ],
       ),
       drawer: DrawerWidget(),
@@ -73,13 +73,16 @@ class _HomeState extends StateMVC<Home> {
             mainAxisSize: MainAxisSize.max,
             children: [
               _buildImageSlider(),
-              const SizedBox(height: 10,),
-              _productProvider.feature.isEmpty ? const CardsCarouselLoaderWidget():
-              _buildDealsOfTheDay(),
+              const SizedBox(
+                height: 10,
+              ),
+              _productProvider.feature.isEmpty
+                  ? const CardsCarouselLoaderWidget()
+                  : _buildDealsOfTheDay(),
 
               //const SizedBox(height: 10,),
               _buildAllProducts(),
-          ],
+            ],
           ),
         ),
       ),
@@ -88,37 +91,47 @@ class _HomeState extends StateMVC<Home> {
 
   Widget _buildImageSlider() {
     List<String> list = _homePageProvider.bannerList;
-    return list.isEmpty?CardsCarouselLoaderWidget()
-    :Container(
-      //height: 100,
-      child: ImageSlideshow(
-        autoPlayInterval: 3000,
-        width: double.infinity,/// Width of the [ImageSlideshow].
-        height: 200,/// Height of the [ImageSlideshow].
-        initialPage: 0,/// The page to show when first creating the [ImageSlideshow].
-        indicatorColor: Colors.blue,/// The color to paint the indicator.
-        indicatorBackgroundColor: Colors.grey,/// The color to paint behind th indicator.
-        /// The widgets to display in the [ImageSlideshow].
-        /// Add the sample image file into the images folder
+    return list.isEmpty
+        ? CardsCarouselLoaderWidget()
+        : Container(
+            //height: 100,
+            child: ImageSlideshow(
+              autoPlayInterval: 3000,
+              width: double.infinity,
 
-        children: [
-          /*ListView.builder(
+              /// Width of the [ImageSlideshow].
+              height: 200,
+
+              /// Height of the [ImageSlideshow].
+              initialPage: 0,
+
+              /// The page to show when first creating the [ImageSlideshow].
+              indicatorColor: Colors.blue,
+
+              /// The color to paint the indicator.
+              indicatorBackgroundColor: Colors.grey,
+
+              /// The color to paint behind th indicator.
+              /// The widgets to display in the [ImageSlideshow].
+              /// Add the sample image file into the images folder
+
+              children: [
+                /*ListView.builder(
           itemBuilder: (context, index) {
             return Image(image: NetworkImage(list[index]));
           }
           ),*/
-          /*Image.asset(
+                /*Image.asset(
             'assets/images/Google.png',
             fit: BoxFit.cover,
           ),*/
 
-          Image(image: NetworkImage(list[0].toString())),
-          Image(image: NetworkImage(list[1].toString())),
-          Image(image: NetworkImage(list[2].toString())),
-        ],
-
-      ),
-    );
+                Image(image: NetworkImage(list[0].toString())),
+                Image(image: NetworkImage(list[1].toString())),
+                Image(image: NetworkImage(list[2].toString())),
+              ],
+            ),
+          );
   }
 
   Widget _buildDealsOfTheDay() {
@@ -128,13 +141,12 @@ class _HomeState extends StateMVC<Home> {
 
     return Column(
       children: <Widget>[
-
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-
             const Text(
-              "Deals Of The Day", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              "Deals Of The Day",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
             GestureDetector(
               onTap: () {
@@ -155,35 +167,34 @@ class _HomeState extends StateMVC<Home> {
             )
           ],
         ),
-        featureProduct.isEmpty ? const CardsCarouselLoaderWidget()
+        featureProduct.isEmpty
+            ? const CardsCarouselLoaderWidget()
             : Container(
-          height: 250,//288,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: featureProduct.length,
-            itemBuilder: (context,index){
-              return GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (ctx) => DetailScreen(
-                          image: featureProduct[index].image,
-                          price: featureProduct[index].price,
-                          name: featureProduct[index].name
+                height: 250, //288,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: featureProduct.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (ctx) => DetailScreen(
+                                image: featureProduct[index].image,
+                                price: featureProduct[index].price,
+                                name: featureProduct[index].name),
+                          ),
+                        );
+                      },
+                      child: SingleProduct(
+                        image: featureProduct[index].image,
+                        price: featureProduct[index].price,
+                        name: featureProduct[index].name,
                       ),
-                    ),
-                  );
-                },
-                child: SingleProduct(
-                  image: featureProduct[index].image,
-                  price: featureProduct[index].price,
-                  name: featureProduct[index].name,
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-
-        ),
+              ),
 /*
         Row(
           children: _productProvider.getHomeFeatureList.map((e) {
@@ -239,7 +250,7 @@ class _HomeState extends StateMVC<Home> {
     return Column(
       children: <Widget>[
         Container(
-          height: 250,
+          height: 50,//250,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -265,7 +276,7 @@ class _HomeState extends StateMVC<Home> {
                     child: const Text(
                       "View more",
                       style:
-                      TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                   )
                 ],
@@ -333,61 +344,43 @@ class _HomeState extends StateMVC<Home> {
               }),
         )*/
         Row(
-            children:
-            _productProvider.getHomeFeatureList.map((e) {
-              return Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            children: _productProvider.getHomeFeatureList.map((e) {
+          return Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                        builder: (ctx) => DetailScreen(
-                                          image: e.image,
-                                          price: e.price,
-                                          name: e.name,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: SingleProduct(
-                                      image: e.image, price: e.price, name: e.name),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                      builder: (ctx) => DetailScreen(
-                                        image: e.image,
-                                        price: e.price,
-                                        name: e.name,
-                                      ),
+                    Expanded(
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => DetailScreen(
+                                      image: e.image,
+                                      price: e.price,
+                                      name: e.name,
                                     ),
-                                  );
-                                },
-                                child: SingleProduct(
-                                    image: e.image, price: e.price, name: e.name),
-                              )
-                            ],
+                                  ),
+                                );
+                              },
+                              child: SingleProduct(
+                                  image: e.image, price: e.price, name: e.name),
+                            ),
                           ),
-                        )
-                      ],
-                    ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
-              );
-            }).toList()),
+              ],
+            ),
+          );
+        }).toList()),
       ],
     );
   }
 }
-
-

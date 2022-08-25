@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../Model/product.dart';
 import '../Pages/Home.dart';
+import '../Pages/Pages.dart';
 import '../provider/ProductProvider.dart';
 import 'DetailScreen.dart';
 
@@ -110,14 +111,14 @@ class ListProduct extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             ),
             onPressed: () {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (ctx) => Home(),
+                  builder: (ctx) => PagesWidget(),
                 ),
               );
             }),
