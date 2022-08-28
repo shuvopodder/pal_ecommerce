@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pal_ecommerce/Pages/Pages.dart';
 import 'package:provider/provider.dart';
 
 import '../Pages/Home.dart';
 import '../provider/ProductProvider.dart';
+import '../provider/WishListProvider.dart';
 import 'checkout.dart';
-import 'mybutton.dart';
 
 class DetailScreen extends StatefulWidget {
   final String image;
@@ -19,6 +20,9 @@ class DetailScreen extends StatefulWidget {
 
 class _DetailScreenState extends State<DetailScreen> {
   int count = 1;
+  bool isFavourite =false;
+
+
   late ProductProvider productProvider;
 
   Widget _buildColorProduct({required Color color}) {
@@ -234,7 +238,7 @@ class _DetailScreenState extends State<DetailScreen> {
           height: 10,
         ),
         Text(
-          "Quentity",
+          "Quantity",
           style: myStyle,
         ),
         SizedBox(
@@ -267,7 +271,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
               GestureDetector(
-                child: Icon(
+                child: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
@@ -281,6 +285,44 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildWishlistPart(){
+    WishListProvider _wishListProvider;
+    _wishListProvider = Provider.of<WishListProvider>(context);
+
+    return Container(
+        alignment: Alignment.topRight,
+
+        child: InkWell(
+          onTap: (){
+            isFavourite ? "": _wishListProvider.addToWishList(widget.name.toString(), widget.image.toString(), widget.price);
+            isFavourite ? "":
+            Fluttertoast.showToast(
+                msg: "Product added to favourite",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                backgroundColor: Colors.blue,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
+            setState(() {
+              isFavourite ? isFavourite = false : isFavourite = true;
+            });
+          },
+          child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    isFavourite
+                        ? const Icon(Icons.favorite, size: 50, color: Color(0xFFEF7532))
+                        : const Icon(Icons.favorite_border, size: 50, color: Color(0xFFEF7532)),
+                  ]
+              )
+          ),
+        )
     );
   }
 
@@ -377,10 +419,11 @@ class _DetailScreenState extends State<DetailScreen> {
             children: <Widget>[
               _buildImage(),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    _buildWishlistPart(),
                     _buildNameToDescriptionPart(),
                     _buildDiscription(),
                     _buildSizePart(),

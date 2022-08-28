@@ -4,6 +4,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 import '../Controllers/profile_controller.dart';
 import '../elements/DrawerWidget.dart';
 import '../elements/PermissionDeniedWidget.dart';
+import '../elements/ProfileAvatarWidget.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 
 class ProfileWidget extends StatefulWidget {
@@ -28,7 +29,7 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
       drawer: DrawerWidget(),
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.sort, color: Colors.black),
+          icon: const Icon(Icons.sort, color: Colors.black),
           onPressed: () => _con.scaffoldKey.currentState!.openDrawer(),
         ),
         automaticallyImplyLeading: false,
@@ -40,17 +41,17 @@ class _ProfileWidgetState extends StateMVC<ProfileWidget> {
           style: Theme.of(context).textTheme.headline6?.merge(TextStyle(letterSpacing: 1.3,
               color: Theme.of(context).primaryColor)),
         ),
-        actions: <Widget>[
-          new ShoppingCartButtonWidget(iconColor: Colors.black, labelColor: Colors.black),
+        actions: const <Widget>[
+          ShoppingCartButtonWidget(iconColor: Colors.white, labelColor: Colors.white),
         ],
       ),
       body: _con.user == null
           ? PermissionDeniedWidget()
           : SingleChildScrollView(
-//              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
               child: Column(
                 children: <Widget>[
-                 // ProfileAvatarWidget(user: currentUser.value),
+                //  ProfileAvatarWidget(user: currentUser.value, usermodel: null,),
                   ListTile(
                     contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     leading: Icon(

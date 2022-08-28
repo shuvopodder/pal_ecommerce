@@ -7,7 +7,7 @@ import 'Model/route_argument.dart';
 import 'Pages/Home.dart';
 import 'Pages/Pages.dart';
 import 'Pages/SplashScreen.dart';
-import 'Pages/cart.dart';
+import 'Pages/Cart.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){

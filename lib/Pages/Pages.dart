@@ -6,6 +6,7 @@ import '../Model/route_argument.dart';
 import '../elements/DrawerWidget.dart';
 import '../helpers/helper.dart';
 import 'Home.dart';
+import 'WishListPage.dart';
 
 class PagesWidget extends StatefulWidget {
   dynamic currentTab;
@@ -51,7 +52,7 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = CategoryPage(parentScaffoldKey: widget.scaffoldKey);
           break;
         case 1:
-          //widget.currentPage = MapWidget( parentScaffoldKey: widget.scaffoldKey, routeArgument: widget.routeArgument);
+          widget.currentPage = WishListPage( parentScaffoldKey: widget.scaffoldKey);
           break;
         case 2:
           widget.currentPage = Home(parentScaffoldKey: widget.scaffoldKey,);

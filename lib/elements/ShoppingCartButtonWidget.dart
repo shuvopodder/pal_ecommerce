@@ -13,8 +13,7 @@ class ShoppingCartButtonWidget extends StatefulWidget {
   final Color labelColor;
 
   @override
-  _ShoppingCartButtonWidgetState createState() =>
-      _ShoppingCartButtonWidgetState();
+  _ShoppingCartButtonWidgetState createState() => _ShoppingCartButtonWidgetState();
 }
 
 class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> {
@@ -32,7 +31,6 @@ class _ShoppingCartButtonWidgetState extends StateMVC<ShoppingCartButtonWidget> 
 
   @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
     var user = FirebaseAuth.instance.authStateChanges();
     return MaterialButton(
       elevation: 0,

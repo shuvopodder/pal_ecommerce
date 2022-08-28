@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
@@ -49,13 +48,13 @@ class _CartWidgetState extends StateMVC<CartWidget> {
               Navigator.of(context).pushReplacementNamed('/Pages', arguments: 2);
 
             },
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             color: Theme.of(context).hintColor,
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: true,
-          title: Text("Cart",),
+          title: const Text("Cart",),
           ),
 
         body: RefreshIndicator(
@@ -71,19 +70,19 @@ class _CartWidgetState extends StateMVC<CartWidget> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 10),
                     child: ListTile(
-                      contentPadding: EdgeInsets.symmetric(vertical: 0),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 0),
                       leading: Icon(
                         Icons.shopping_cart,
                         color: Theme.of(context).hintColor,
                       ),
                       title: Text(
-                        'S.of(context).shopping_cart',
+                        'Shopping Cart',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       subtitle: Text(
-                        'S.of(context).verify_your_quantity_and_click_checkout',
+                        'Verify your quantity and click checkout',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.caption,
@@ -91,16 +90,16 @@ class _CartWidgetState extends StateMVC<CartWidget> {
                     ),
                   ),
                   ListView.separated(
-                    padding: EdgeInsets.only(top: 15, bottom: 120),
+                    padding: const EdgeInsets.only(top: 15, bottom: 120),
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     primary: false,
                     itemCount: _con.carts.length,
                     separatorBuilder: (context, index) {
-                      return SizedBox(height: 15);
+                      return const SizedBox(height: 15);
                     },
                     itemBuilder: (context, index) {
-                      return CartItemWidget(
+                      return const CartItemWidget(
                         /*cart: _con.carts.elementAt(index),
                         heroTag: 'cart',
                         increment: () {
@@ -119,10 +118,10 @@ class _CartWidgetState extends StateMVC<CartWidget> {
               ),
               Container(
                 padding: const EdgeInsets.all(18),
-                margin: EdgeInsets.only(bottom: 15),
+                margin: const EdgeInsets.only(bottom: 15),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                     boxShadow: [BoxShadow(color: Theme.of(context).focusColor.withOpacity(0.15), offset: Offset(0, 2), blurRadius: 5.0)]),
                 child: TextField(
                   keyboardType: TextInputType.text,
@@ -132,13 +131,13 @@ class _CartWidgetState extends StateMVC<CartWidget> {
                   cursorColor: Theme.of(context).accentColor,
                 //  controller: TextEditingController()..text = coupon?.code ?? '',
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                     floatingLabelBehavior: FloatingLabelBehavior.always,
                     hintStyle: Theme.of(context).textTheme.bodyText1,
                    // suffixText: coupon?.valid == null ? '' : (coupon.valid ? S.of(context).validCouponCode : S.of(context).invalidCouponCode),
                    // suffixStyle: Theme.of(context).textTheme.caption.merge(TextStyle(color: _con.getCouponIconColor())),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                    suffixIcon: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Icon(
                         Icons.confirmation_number,
                        // color: _con.getCouponIconColor(),

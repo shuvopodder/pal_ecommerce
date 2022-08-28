@@ -1,11 +1,9 @@
-
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EmptyCartWidget extends StatefulWidget {
-  EmptyCartWidget({
+  const EmptyCartWidget({
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +16,7 @@ class _EmptyCartWidgetState extends State<EmptyCartWidget> {
 
   @override
   void initState() {
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       if (mounted) {
         setState(() {
           loading = false;
@@ -40,10 +38,10 @@ class _EmptyCartWidgetState extends State<EmptyCartWidget> {
                       Theme.of(context).accentColor.withOpacity(0.2),
                 ),
               )
-            : SizedBox(),
+            : const SizedBox(),
         Container(
           alignment: AlignmentDirectional.center,
-          padding: EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           height: 70,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -99,32 +97,31 @@ class _EmptyCartWidgetState extends State<EmptyCartWidget> {
                   )
                 ],
               ),
-              SizedBox(height: 15),
-              Opacity(
+              const SizedBox(height: 15),
+              const Opacity(
                 opacity: 0.4,
                 child: Text(
-                  "S.of(context).dont_have_any_item_in_your_cart",
+                  "Don't have any item in your cart",
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               !loading
                   ? MaterialButton(
-      elevation: 0,
-      focusElevation: 0,
-      highlightElevation: 0,
+                      elevation: 0,
+                      focusElevation: 0,
+                      highlightElevation: 0,
                       onPressed: () {
                         Navigator.of(context).pushNamed('/Pages', arguments: 2);
                       },
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 30),
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
                       color: Theme.of(context).accentColor.withOpacity(1),
-                      shape: StadiumBorder(),
-                      child: Text(
-                        "S.of(context).start_exploring,",
+                      shape: const StadiumBorder(),
+                      child: const Text(
+                        "Start exploring,",
                       ),
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
             ],
           ),
         ),

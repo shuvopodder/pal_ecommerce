@@ -9,6 +9,7 @@ import '../Controllers/home_controller.dart';
 import '../Model/product.dart';
 import '../Screen/DetailScreen.dart';
 import '../Screen/ListProduct.dart';
+import '../Screen/search_product.dart';
 import '../Screen/singeproduct.dart';
 import '../elements/ShoppingCartButtonWidget.dart';
 import '../provider/HomePageProvider.dart';
@@ -34,6 +35,11 @@ class _HomeState extends StateMVC<Home> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     _homePageProvider = Provider.of<HomePageProvider>(context);
     _productProvider = Provider.of<ProductProvider>(context);
@@ -58,8 +64,9 @@ class _HomeState extends StateMVC<Home> {
         centerTitle: true,
         title: const Text("Pal Ecommerce"),
         actions: <Widget>[
-          new ShoppingCartButtonWidget(
-              iconColor: Colors.black, labelColor: Colors.black),
+          _buildSearchBar(context),
+          const ShoppingCartButtonWidget(
+              iconColor: Colors.white, labelColor: Colors.white),
         ],
       ),
       drawer: DrawerWidget(),
@@ -86,6 +93,20 @@ class _HomeState extends StateMVC<Home> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSearchBar(context) {
+    List<Product> snapShot = _productProvider.getFeatureList;
+
+    return IconButton(
+      icon: const Icon(
+        Icons.search,
+      ),
+      onPressed: () {
+        _productProvider.getSearchList(list: snapShot);
+        showSearch(context: context, delegate: SearchProduct());
+      },
     );
   }
 
@@ -246,11 +267,13 @@ class _HomeState extends StateMVC<Home> {
   Widget _buildAllProducts() {
     //List<Product> newAchivesProduct = productProvider.getNewAchiesList;
 
+    final Orientation orientation = MediaQuery.of(context).orientation;
+
     List<Product> featureProduct = _productProvider.getFeatureList;
     return Column(
       children: <Widget>[
         Container(
-          height: 50,//250,
+          height: 50, //250,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
@@ -344,7 +367,7 @@ class _HomeState extends StateMVC<Home> {
                 );
               }),
         )*/
-        Row(
+        /*Row(
             children: _productProvider.getHomeFeatureList.map((e) {
           return Expanded(
             child: Column(
@@ -380,7 +403,30 @@ class _HomeState extends StateMVC<Home> {
               ],
             ),
           );
-        }).toList()),
+        }).toList()),*/
+
+        GridView.count(
+          crossAxisCount: orientation == Orientation.portrait ? 2 : 3,
+          childAspectRatio: orientation == Orientation.portrait ? 0.8 : 0.9,
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          children: _productProvider.getHomeFeatureList
+              .map(
+                (e) => GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (ctx) => DetailScreen(
+                            image: e.image, price: e.price, name: e.name)));
+                  },
+                  child: SingleProduct(
+                    price: e.price,
+                    image: e.image,
+                    name: e.name,
+                  ),
+                ),
+              )
+              .toList(),
+        ),
       ],
     );
   }

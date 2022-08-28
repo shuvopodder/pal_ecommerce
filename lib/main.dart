@@ -9,6 +9,7 @@ import 'package:pal_ecommerce/Pages/login.dart';
 import 'package:pal_ecommerce/provider/CategoryProvider.dart';
 import 'package:pal_ecommerce/provider/HomePageProvider.dart';
 import 'package:pal_ecommerce/provider/ProductProvider.dart';
+import 'package:pal_ecommerce/provider/WishListProvider.dart';
 import 'package:pal_ecommerce/route_generator.dart';
 import 'package:provider/provider.dart';
 import 'Pages/Pages.dart';
@@ -31,6 +32,8 @@ Future<void> main() async {
               create: (context) => CategoryProvider()),
           ChangeNotifierProvider<ProductProvider>(
               create: (context) => ProductProvider()),
+          ChangeNotifierProvider<WishListProvider>(
+              create: (context) => WishListProvider()),
           ChangeNotifierProvider<Authentication>(
               create: (context) => Authentication(
 
