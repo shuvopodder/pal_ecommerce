@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pal_ecommerce/Pages/CategoryPage.dart';
 import 'package:pal_ecommerce/Pages/profile.dart';
 
 import '../Model/route_argument.dart';
@@ -47,7 +48,7 @@ class _PagesWidgetState extends State<PagesWidget> {
       widget.currentTab = tabItem;
       switch (tabItem) {
         case 0:
-          //widget.currentPage = NotificationsWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage = CategoryPage(parentScaffoldKey: widget.scaffoldKey);
           break;
         case 1:
           //widget.currentPage = MapWidget( parentScaffoldKey: widget.scaffoldKey, routeArgument: widget.routeArgument);
@@ -94,11 +95,11 @@ class _PagesWidgetState extends State<PagesWidget> {
           },
           // this will be set when a new tab is tapped
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.category),
               label: '',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.favorite),
               label: '',
             ),
@@ -109,7 +110,7 @@ class _PagesWidgetState extends State<PagesWidget> {
                   height: 42,
                   decoration: BoxDecoration(
                     color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(50),
                     ),
                     boxShadow: [
@@ -123,15 +124,15 @@ class _PagesWidgetState extends State<PagesWidget> {
                           offset: Offset(0, 3))
                     ],
                   ),
-                  child: new Icon(Icons.home,
-                      color: Theme.of(context).primaryColor),
+                  child: const Icon(Icons.home,
+                      color: Colors.white),
                 )),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.arrow_back),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.arrow_back),
               label: '',
             ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.account_circle_outlined),
+            const BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_outlined),
               label: '',
             ),
           ],

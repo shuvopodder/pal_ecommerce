@@ -9,7 +9,7 @@ class HomePageProvider with ChangeNotifier{
         .then((QuerySnapshot querySnapshot) {
           querySnapshot.docs.forEach((doc) {
             bannerList.add(doc['image'].toString());
-            print("print: "+doc["image"]);
+          //  print("print: "+doc["image"]);
       });
     });
     notifyListeners();

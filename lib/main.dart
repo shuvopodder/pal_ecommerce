@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pal_ecommerce/Controllers/authentication.dart';
 import 'package:pal_ecommerce/Pages/login.dart';
+import 'package:pal_ecommerce/provider/CategoryProvider.dart';
 import 'package:pal_ecommerce/provider/HomePageProvider.dart';
 import 'package:pal_ecommerce/provider/ProductProvider.dart';
 import 'package:pal_ecommerce/route_generator.dart';
@@ -26,6 +27,8 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider<HomePageProvider>(
               create: (context) => HomePageProvider()),
+          ChangeNotifierProvider<CategoryProvider>(
+              create: (context) => CategoryProvider()),
           ChangeNotifierProvider<ProductProvider>(
               create: (context) => ProductProvider()),
           ChangeNotifierProvider<Authentication>(

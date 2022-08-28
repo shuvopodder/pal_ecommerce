@@ -104,7 +104,6 @@ class ListProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   // categoryProvider = Provider.of<CategoryProvider>(context);
     productProvider = Provider.of<ProductProvider>(context);
     return Scaffold(
       appBar: AppBar(

@@ -50,7 +50,7 @@ class _CheckOutState extends State<CheckOut> {
         child: RaisedButton(
           child: const Text(
             "Buy",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.white),
           ),
           color: const Color(0xff746bc9),
           onPressed: () {
@@ -189,13 +189,13 @@ class _CheckOutState extends State<CheckOut> {
             NotificationButton(),
           ],*/
         ),
-        /*bottomNavigationBar: Container(
+        bottomNavigationBar: Container(
           height: 70,
           width: 100,
           margin: const EdgeInsets.symmetric(horizontal: 10),
           padding: const EdgeInsets.only(bottom: 15),
           child: _buildButton(),
-        ),*/
+        ),
         body: Container(
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
@@ -245,7 +245,6 @@ class _CheckOutState extends State<CheckOut> {
                   ),
                 ),
               ),
-              _buildButton()
             ],
           ),
         ),
