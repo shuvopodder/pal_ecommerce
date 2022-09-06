@@ -12,6 +12,7 @@ import 'package:pal_ecommerce/provider/ProductProvider.dart';
 import 'package:pal_ecommerce/provider/WishListProvider.dart';
 import 'package:pal_ecommerce/route_generator.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Pages/Pages.dart';
 import 'Pages/login2.dart';
 
@@ -19,7 +20,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  //SharedPreferences prefs = await SharedPreferences.getInstance();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
@@ -36,10 +37,9 @@ Future<void> main() async {
               create: (context) => WishListProvider()),
           ChangeNotifierProvider<Authentication>(
               create: (context) => Authentication(
-
                   firebaseAuth: FirebaseAuth.instance,
                   googleSignIn: GoogleSignIn(),
-                  //prefs: prefs,
+                  prefs: prefs,
                   firebaseFirestore: firebaseFirestore
               )),
         ], child: const MyApp(),),
@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.hasData) {
             return PagesWidget();
           } else {
-            return LoginPage2();
+            return LoginPage();
           }
         },
       ),

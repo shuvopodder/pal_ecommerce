@@ -59,14 +59,7 @@ class ProductProvider with ChangeNotifier {
     required String size,
     required String image,
   }) {
-    checkOutModel = CartModel(
-      color: color,
-      size: size,
-      price: price,
-      name: name,
-      image: image,
-      quantity: quantity,
-    );
+    checkOutModel = CartModel( color: color, size: size, price: price, name: name, image: image, quantity: quantity,);
     checkOutModelList.add(checkOutModel);
   }
 

@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import 'package:pal_ecommerce/Controllers/UserController.dart';
+import 'package:pal_ecommerce/Pages/Pages.dart';
+import 'package:pal_ecommerce/Pages/signup.dart';
+import 'package:provider/provider.dart';
+
+import '../Controllers/authentication.dart';
 
 class LoginPage extends StatefulWidget {
  // const LoginPage({Key? key}) : super(key: key);
@@ -24,8 +29,14 @@ class _LoginPageState extends StateMVC<LoginPage> {
 
   }
 
+  TextEditingController em = TextEditingController();
+  TextEditingController pass = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+
+    Authentication auth = Provider.of<Authentication>(context);
+
     return Scaffold(
       key: con.scaffoldKey,
         resizeToAvoidBottomInset: false,
@@ -57,6 +68,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                         //email
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
+                         controller: em,
                          // onSaved: (input)=> con.usermodel.email=input!,
                           validator: (input)=>input!.contains('@')
                               ?"Should be a valid email":null,
@@ -88,6 +100,7 @@ class _LoginPageState extends StateMVC<LoginPage> {
                         //password
                         TextFormField(
                           keyboardType: TextInputType.text,
+                          controller: pass,
                           //onSaved: (input)=> con.usermodel.password=input!,
                           validator: (input)=>input!.length < 3
                               ?"Should be more than 3 character!":null,
@@ -130,8 +143,30 @@ class _LoginPageState extends StateMVC<LoginPage> {
                         //login button
                         MaterialButton(
                           color: Theme.of(context).colorScheme.primary,
-                          onPressed: () {
-                            con.login();
+                          onPressed: () async {
+                            //con.login();
+
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                content: Text('Signing...')));
+
+                            try {
+                              bool isSuccess = await auth.handleSignIn(em.text,pass.text);
+                              if (isSuccess) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PagesWidget(currentTab:2),
+                                  ),
+                                );
+                              }else{
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                    content: Text('Error! Try google signing.')));
+                              }
+                            } on PlatformException catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content:
+                                  Text('No PlayStore Detected on the device!')));
+                            }
                           },
                           child: Container(
                               alignment: Alignment.center,
@@ -161,10 +196,10 @@ class _LoginPageState extends StateMVC<LoginPage> {
                           focusElevation: 0,
                           highlightElevation: 0,
                           onPressed: () {
-                            /*Navigator.push(
+                            Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Register()),
-                          );*/
+                            MaterialPageRoute(builder: (context) => SignupPage()),
+                          );
                           },
                           textColor: Theme.of(context).hintColor,
                           child: const Text("Signup"),

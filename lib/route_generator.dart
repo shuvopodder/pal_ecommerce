@@ -8,6 +8,7 @@ import 'Pages/Home.dart';
 import 'Pages/Pages.dart';
 import 'Pages/SplashScreen.dart';
 import 'Pages/Cart.dart';
+import 'Pages/WishListPage.dart';
 
 class RouteGenerator{
   static Route<dynamic> generateRoute(RouteSettings settings){
@@ -23,6 +24,8 @@ class RouteGenerator{
         return MaterialPageRoute(builder: (_) => SplashScreen());
       case '/CheckOut':
         return MaterialPageRoute(builder: (_)=>CheckOut());
+      case '/Favourite':
+        return MaterialPageRoute(builder: (_) => WishListPage());
 
       case '/Cart':
         return MaterialPageRoute(builder: (_) => CartWidget(routeArgument: args as RouteArgument));

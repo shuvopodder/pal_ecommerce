@@ -22,7 +22,8 @@ class _CheckOutState extends State<CheckOut> {
 
   late ProductProvider productProvider;
 
-  Widget _buildBottomSingleDetail({required String startName, required String endName}) {
+  Widget _buildBottomSingleDetail(
+      {required String startName, required String endName}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -43,6 +44,51 @@ class _CheckOutState extends State<CheckOut> {
   late List<CartModel> myList;
 
   Widget _buildButton() {
+    return ElevatedButton(
+      onPressed: () {
+        productProvider.userModelList.map((e) {
+          if (productProvider.getCheckOutModelList.isNotEmpty) {
+            FirebaseFirestore.instance.collection("Order").add({
+              "Product": productProvider.getCheckOutModelList
+                  .map((c) => {
+                        "ProductName": c.name,
+                        "ProductPrice": c.price,
+                        "ProductQuantity": c.quantity,
+                        "ProductImage": c.image,
+                        "Product Color": c.color,
+                        "Product Size": c.size,
+                      })
+                  .toList(),
+              "TotalPrice": total.toStringAsFixed(2),
+              "UserName": e.userName,
+              "UserEmail": e.userEmail,
+              "UserNumber": e.userPhoneNumber,
+              "UserAddress": e.userAddress,
+              "UserId": user.uid,
+            });
+            setState(() {
+              myList.clear();
+            });
+
+            // productProvider.addNotification("Notification");
+          } else {
+            _scaffoldKey.currentState?.showSnackBar(
+              const SnackBar(
+                content: Text("No Item Yet"),
+              ),
+            );
+          }
+        });
+        print("Buy Button pressed!");
+      },
+      child: const Text(
+        "Buy",
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  /*Widget _buildButton() {
     return Column(
         children: productProvider.userModelList.map((e) {
       return Container(
@@ -127,7 +173,7 @@ class _CheckOutState extends State<CheckOut> {
         ),*/
       );
     }).toList());
-  }
+  }*/
 
   @override
   void initState() {
@@ -169,7 +215,8 @@ class _CheckOutState extends State<CheckOut> {
         key: _scaffoldKey,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("CheckOut Page", style: TextStyle(color: Colors.black)),
+          title: const Text("CheckOut Page",
+              style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
           leading: IconButton(
@@ -185,7 +232,7 @@ class _CheckOutState extends State<CheckOut> {
               );
             },
           ),
-         /* actions: <Widget>[
+          /* actions: <Widget>[
             NotificationButton(),
           ],*/
         ),
@@ -197,7 +244,7 @@ class _CheckOutState extends State<CheckOut> {
           child: _buildButton(),
         ),
         body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -250,7 +297,5 @@ class _CheckOutState extends State<CheckOut> {
         ),
       ),
     );
-
-
   }
 }
