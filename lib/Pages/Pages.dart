@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pal_ecommerce/Pages/CategoryPage.dart';
 import 'package:pal_ecommerce/Pages/profile.dart';
+import 'package:pal_ecommerce/Pages/profile2.dart';
 
 import '../Model/route_argument.dart';
 import '../elements/DrawerWidget.dart';
@@ -58,10 +59,10 @@ class _PagesWidgetState extends State<PagesWidget> {
           widget.currentPage = Home(parentScaffoldKey: widget.scaffoldKey,);
           break;
         case 3:
-          //widget.currentPage = OrdersWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage = Home(parentScaffoldKey: widget.scaffoldKey,);
           break;
         case 4:
-          widget.currentPage = ProfileWidget( parentScaffoldKey: widget.scaffoldKey); //FavoritesWidget(parentScaffoldKey: widget.scaffoldKey);
+          widget.currentPage = ProfileWidget2( parentScaffoldKey: widget.scaffoldKey);
           break;
       }
     });

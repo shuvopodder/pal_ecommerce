@@ -150,6 +150,7 @@ class _HomeState extends StateMVC<Home> {
                 Image(image: NetworkImage(list[0].toString())),
                 Image(image: NetworkImage(list[1].toString())),
                 Image(image: NetworkImage(list[2].toString())),
+                Image(image: NetworkImage(list[2].toString())),
               ],
             ),
           );
@@ -424,8 +425,7 @@ class _HomeState extends StateMVC<Home> {
                     name: e.name,
                   ),
                 ),
-              )
-              .toList(),
+              ).toList(),
         ),
       ],
     );

@@ -81,7 +81,7 @@ class ProductProvider with ChangeNotifier {
         featureData = Product(
             image: element["image"],
             name: element["name"],
-            price: element["price"]);
+            price: double.parse(element["price"].toString()));
         newList.add(featureData);
       },
     );
@@ -103,7 +103,7 @@ class ProductProvider with ChangeNotifier {
         featureData = Product(
             image: element["image"],
             name: element["name"],
-            price: element["price"]);
+            price: double.parse(element["price"].toString()));
         newList.add(featureData);
       },
     );
@@ -126,7 +126,7 @@ class ProductProvider with ChangeNotifier {
         featureData = Product(
             image: element["image"],
             name: element["name"],
-            price: element["price"]);
+            price: double.parse(element["price"].toString()));
         newList.add(featureData);
       },
     );
